@@ -1,11 +1,59 @@
-body {
+* {
   margin: 0;
   padding: 0;
   outline: none;
   border: 0;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+:root {
+
+  --text: #fafeff;
+  --background: #02181d;
+  --primary-button: #f4765d;
+  --secondary-button: #043039;
+  --accent: #db310f;
+
+}
+
+.accent {
+  color: var(--accent);
+  background-image: linear-gradient(120deg, var(--primary-button), var(--accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+button, .btn {
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 0.3rem;
+  color: auto;
+}
+
+button.btn-primary {
+  background-color: var(--primary-button);
+}
+
+button.btn-secondary {
+  background-color: var(--secondary-button);
+  color: var(--text);
+}
+
+button:hover, .btn:hover {
+  cursor: pointer;
+}
+
+.hello {
+  color: var(--accent);
 }
