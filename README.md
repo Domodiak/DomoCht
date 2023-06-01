@@ -1,5 +1,5 @@
-# DomoTalk
+# DomoCht
 
-DomoTalk is a place to talk with your friends
+DomoCht is a place to chat with your friends
 
 See you later
