@@ -41,19 +41,15 @@ button, .btn {
   color: auto;
 }
 
-button.btn-primary {
+.btn-primary {
   background-color: var(--primary-button);
 }
 
-button.btn-secondary {
+.btn-secondary {
   background-color: var(--secondary-button);
   color: var(--text);
 }
 
 button:hover, .btn:hover {
   cursor: pointer;
-}
-
-.hello {
-  color: var(--accent);
 }
