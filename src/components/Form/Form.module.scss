@@ -1,0 +1,11 @@
+.form {
+    padding: 1rem;
+}
+
+.textField {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 3px solid var(--secondary-button);
+    background-color: transparent;
+    color: var(--text);
+}

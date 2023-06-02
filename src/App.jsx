@@ -1,13 +1,15 @@
-import styles from './App.module.scss';
+//import styles from './App.module.scss';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
-    <div className="App">
-      <h1>You should be able to properly communicate <span className='accent'>here</span> soon.</h1>
-      <button className='btn-primary'>Button</button>
-      <button className='btn-secondary'>Button</button>
-      <div className={styles['h6']}>Hi</div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="register/" Component={Register}/>
+      </Routes>
+    </Router>
   );
 }
 
