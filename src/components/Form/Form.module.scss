@@ -3,7 +3,6 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    max-width: max(20%, 700px);
 }
 
 .textField {
@@ -16,17 +15,17 @@
     font-size: 0.9rem;
 }
 
-$hi: "";
+$placeholder: "";
 .inputContainer
 {
     position: relative;
     margin: 0.5rem;
     flex-grow: 1;
     flex-shrink: 1;
-    $hi: var(--placeholder);
+    $placeholder: var(--placeholder);
     &::before {
         position: absolute;
-        content: $hi;
+        content: $placeholder;
         top: 0;
         left: 0.5rem;
         transform: translate(0, -50%);
