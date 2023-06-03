@@ -52,3 +52,11 @@ button, .btn {
   background-color: var(--secondary-button);
   color: var(--text);
 }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 300,
+  'GRAD' 0,
+  'opsz' 48
+}

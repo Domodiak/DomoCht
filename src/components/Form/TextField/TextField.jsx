@@ -1,7 +1,9 @@
 import styles from "../Form.module.scss"
 
-export default function TextField({ placeholder, value, type }) {
+export default function TextField({ placeholder, value, type, width }) {
     return(
-        <input type={type} placeholder={placeholder} className={styles.textField} />
+        <div style={{"width": width, "--placeholder": `"${placeholder}"`}} className={styles.inputContainer}>
+            <input type={type} className={styles.textField} />
+        </div>
     )
 }

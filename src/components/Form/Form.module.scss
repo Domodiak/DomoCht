@@ -1,5 +1,9 @@
 .form {
     padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: max(20%, 700px);
 }
 
 .textField {
@@ -8,4 +12,52 @@
     border: 3px solid var(--secondary-button);
     background-color: transparent;
     color: var(--text);
+    width: calc(100% - 2rem);
+    font-size: 0.9rem;
+}
+
+$hi: "";
+.inputContainer
+{
+    position: relative;
+    margin: 0.5rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+    $hi: var(--placeholder);
+    &::before {
+        position: absolute;
+        content: $hi;
+        top: 0;
+        left: 0.5rem;
+        transform: translate(0, -50%);
+        background-color: var(--background);
+        padding: 0.3rem;
+        font-size: min(16px, 4vw);
+    }
+    .iconVisible {
+        position: absolute;
+        top: 50%;
+        right: 0.5rem;
+        transform: translate(0, -50%);
+        font-size: 2rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .iconInisible {
+        position: absolute;
+        top: 50%;
+        right: 0.5rem;
+        transform: translate(0, -50%);
+        font-size: 2rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.passwordField {
+    padding-right: 4rem;
+    width: calc(100% - 5rem);
 }
