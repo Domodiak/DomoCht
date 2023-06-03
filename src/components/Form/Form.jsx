@@ -1,9 +1,9 @@
 import styles from './Form.module.scss'
 
-export default function Form({ children, onSubmit, onError, formClass }) {
+export default function Form({ children, onSubmit, formClass }) {
     const classes = [styles.form, formClass]
     return(
-        <form className={classes.join(' ')}>
+        <form noValidate className={classes.join(' ')} onSubmit={(e) => {e.preventDefault(); onSubmit(e)}}>
             { children }
         </form>
     )

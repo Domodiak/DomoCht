@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    width: 100%;
 }
 
 .textField {
@@ -59,4 +60,16 @@ $placeholder: "";
 .passwordField {
     padding-right: 4rem;
     width: calc(100% - 5rem);
+}
+
+.submit {
+    background-color: var(--primary-button);
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
 }
