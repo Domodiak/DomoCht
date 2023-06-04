@@ -22,7 +22,7 @@ export default function Register() {
     const [ data, setData ] = useState({})
 
     function handleSubmit(e) {
-        var username = data["username"] || ""
+        //var username = data["username"] || ""
         var email = data["email"] || ""
         var password1 = data["password1"] || ""
         var password2 = data["password2"] || ""
