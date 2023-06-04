@@ -1,0 +1,69 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+}
+@media(max-width: 450px) {
+    .formContainer {
+        box-sizing: border-box;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        width: 100%!important;
+    }
+}
+.formContainer {
+    width: max(30%, 400px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .buttons {
+        padding: 0.5rem;
+        width: 100%;
+
+        .registerButton {
+            position: relative;
+            width: calc(100% - 1rem);
+            padding: 1rem;
+            padding-left:5rem;
+            background-color: white;
+            padding-right:5rem;
+            .buttonGoogleLogo {
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translate(0, -50%);
+                width: 2rem;
+                aspect-ratio: 1;
+            }
+            &:nth-child(2) {
+                background-color: var(--secondary-button);
+                color: var(--text);
+            }
+        }
+    }
+}
+
+.separator {
+    position:relative;
+    background-color: var(--background);
+    padding: 0.5rem;
+    &::before {
+        content: "";
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        width: 20vw;
+        height: 1px;
+        background-color: var(--secondary-button);
+        z-index: -1;
+   }
+}

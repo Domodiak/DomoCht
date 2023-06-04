@@ -1,16 +1,17 @@
 import { Helmet } from "react-helmet"
 import Form from "../../components/Form/Form"
 import TextField from "../../components/Form/TextField/TextField"
-import styles from "./Register.module.scss"
+import styles from "./Login.module.scss"
 import PasswordField from "../../components/Form/TextField/PasswordField"
 import Submit from "../../components/Form/Buttons/Submit"
-import { useState, useContext, useEffect } from "react"
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
+import { useContext, useEffect, useState } from "react"
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 
-export default function Register() {
-
+export default function Login() {
+    const [ data, setData ] = useState({})
+    
     const navigate = useNavigate()
     const user = useContext(UserContext)
     useEffect(() => {
@@ -19,17 +20,16 @@ export default function Register() {
         }
     })
 
-    const [ data, setData ] = useState({})
 
     function handleSubmit(e) {
-        var username = data["username"] || ""
         var email = data["email"] || ""
         var password1 = data["password1"] || ""
-        var password2 = data["password2"] || ""
-        if(password1 !== password2) return
-        createUserWithEmailAndPassword(getAuth(), email, password1)
+        signInWithEmailAndPassword(getAuth(), email, password1)
         .catch((error) => {
             console.log(error.code, error.message)
+        })
+        .then((userCredential) => {
+            console.log(userCredential.user.uid)
         })
     }
 
@@ -39,24 +39,22 @@ export default function Register() {
     return (
         <>
             <Helmet>
-                <title>DomoCht - Registration</title>
+                <title>DomoCht - Sign in</title>
             </Helmet>
             <div className={styles.app}>
                 <div className={styles.formContainer}>
-                    <h1>Create an account</h1>
+                    <h1>Sign in</h1>
                     <Form formClass={styles.registrationForm} onSubmit={handleSubmit}>
-                        <TextField  name="username" placeholder="Username" type="text" width="30%" onInput={handleInput} />
-                        <TextField name="email" placeholder="Email" type="email" width="30%" onInput={handleInput} />
+                        <TextField name="email" placeholder="Email" type="email" width="100%" onInput={handleInput} />
                         <PasswordField name="password1" placeholder="Password" width="100%" onInput={handleInput} />
-                        <PasswordField name="password2" placeholder="Confirm Password" type="password" width="100%" onInput={handleInput} />
-                        <Submit text="Sign up"/>
+                        <Submit text="Sign in"/>
                     </Form>
 
                     <div className={styles.separator}>or</div>
 
                     <div className={styles.buttons}>
                         <button className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
-                        <button className={styles.registerButton}>Sign in</button>
+                        <button className={styles.registerButton}>Sign up</button>
                     </div>
                 </div>
             </div>
