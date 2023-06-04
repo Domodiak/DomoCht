@@ -7,12 +7,13 @@
 }
 
 .textField {
-    border-radius: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 0.3rem;
     padding: 1rem;
     border: 3px solid var(--secondary-button);
     background-color: transparent;
     color: var(--text);
-    width: calc(100% - 2rem);
+    width: 100%;
     font-size: 0.9rem;
 }
 
@@ -58,8 +59,9 @@ $placeholder: "";
 }
 
 .passwordField {
+    box-sizing: border-box;
     padding-right: 4rem;
-    width: calc(100% - 5rem);
+    width: calc(100%);
 }
 
 .submit {
@@ -67,7 +69,7 @@ $placeholder: "";
     width: 100%;
     padding: 1rem;
     margin: 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     font-size: 1rem;
     &:hover {
         cursor: pointer;
