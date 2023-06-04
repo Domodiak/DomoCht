@@ -46,8 +46,8 @@ export default function Register() {
                     <div className={styles.separator}>or</div>
 
                     <div className={styles.buttons}>
-                        <button className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign up with Google</button>
-                        <button className={styles.registerButton}>Sign</button>
+                        <button className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
+                        <button className={styles.registerButton}>Sign in</button>
                     </div>
                 </div>
             </div>
