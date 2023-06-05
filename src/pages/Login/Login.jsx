@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react"
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
+import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 
 export default function Login() {
     const [ data, setData ] = useState({})
@@ -36,6 +37,7 @@ export default function Login() {
     function handleInput(name, event) {
         setData((v) => {v[name] = event.target.value; return v})
     }
+
     return (
         <>
             <Helmet>
@@ -43,7 +45,7 @@ export default function Login() {
             </Helmet>
             <div className={styles.app}>
                 <div className={styles.formContainer}>
-                    <h1>Sign in</h1>
+                    <h1>Welcome!</h1>
                     <Form formClass={styles.registrationForm} onSubmit={handleSubmit}>
                         <TextField name="email" placeholder="Email" type="email" width="100%" onInput={handleInput} />
                         <PasswordField name="password1" placeholder="Password" width="100%" onInput={handleInput} />
@@ -53,7 +55,7 @@ export default function Login() {
                     <div className={styles.separator}>or</div>
 
                     <div className={styles.buttons}>
-                        <button className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
+                        <button onClick={signInWithGoogle} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
                         <button className={styles.registerButton}>Sign up</button>
                     </div>
                 </div>

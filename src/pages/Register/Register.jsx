@@ -8,6 +8,7 @@ import { useState, useContext, useEffect } from "react"
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
+import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 
 export default function Register() {
 
@@ -55,7 +56,7 @@ export default function Register() {
                     <div className={styles.separator}>or</div>
 
                     <div className={styles.buttons}>
-                        <button className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
+                        <button onClick={signInWithGoogle} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
                         <button className={styles.registerButton}>Sign in</button>
                     </div>
                 </div>

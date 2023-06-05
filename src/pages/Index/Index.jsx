@@ -25,7 +25,7 @@ export default function Index() {
                 <title>DomoCht - Index</title>
             </Helmet>
             <div>
-                <div>Hello World!</div>
+                <div>Hello world!</div>
                 <Link to="/register/">Register</Link>
                 <br />
                 <Link to="/login/">Log in</Link>
