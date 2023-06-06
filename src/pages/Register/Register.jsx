@@ -9,11 +9,12 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
-import { doc, getFirestore, updateDoc } from "firebase/firestore"
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore"
 
 export default function Register() {
-
+    
     const firestore = getFirestore()
+    const usernamesRef = collection(firestore, "usernames")
     const navigate = useNavigate()
     const user = useContext(UserContext)
     useEffect(() => {
@@ -33,9 +34,12 @@ export default function Register() {
         createUserWithEmailAndPassword(getAuth(), email, password1)
             .then((userCredential) => {
                 const uid = userCredential.user.uid
-                const userDoc = doc(firestore, "usernames", username)
                 
-                updateDoc(userDoc, { "uid": uid } )
+                const usernameRef = doc(usernamesRef, username)
+                setDoc(usernameRef, { "uid": uid })
+                    .catch((err) => {
+                        userCredential.user.delete() //well... skill issue
+                    })
             })
             .catch((error) => {
                 console.log(error.code, error.message)

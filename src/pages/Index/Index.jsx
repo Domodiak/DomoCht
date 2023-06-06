@@ -16,29 +16,27 @@ export default function Index() {
     const navigate = useNavigate()
     const user = useContext(UserContext)
     const [ username, setUsername ] = useState(undefined)
-    
     const firestore = getFirestore()
     const usernamesRef = collection(firestore, "usernames")
-    const userQueryRef = query(usernamesRef, where("uid", "==", user.uid), limit(1))
-
-    useEffect(() => {
-        getDocs(userQueryRef)
-            .then((snapshot) => {
-                if(!snapshot.empty) {
-                    setUsername(snapshot.docs[0].id)
-                }
-            })
-            .catch((reason) => {
-                console.log(reason)
-                setUsername("error fetching username")
-            })
-    })
-
     useEffect(() => {
         if(!user) {
             navigate("/login/")   
+        } else {
+            const userQueryRef = query(usernamesRef, where("uid", "==", user.uid), limit(1))
+            getDocs(userQueryRef)
+                .then((snapshot) => {
+                    if(!snapshot.empty) {
+                        setUsername(snapshot.docs[0].id)
+                    }
+                })
+                .catch((reason) => {
+                    console.log(reason)
+                    setUsername("error fetching username")
+                })
         }
     })
+    
+
 
     return(
         <>
