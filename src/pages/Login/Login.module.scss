@@ -50,20 +50,3 @@
         }
     }
 }
-
-.separator {
-    position:relative;
-    background-color: var(--background);
-    padding: 0.5rem;
-    &::before {
-        content: "";
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%, -50%);
-        width: 20vw;
-        height: 1px;
-        background-color: var(--secondary-button);
-        z-index: -1;
-   }
-}

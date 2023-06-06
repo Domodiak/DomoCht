@@ -10,6 +10,7 @@ import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore"
+import Separator from "../../components/Separator/Separator"
 
 export default function Register() {
     
@@ -65,11 +66,11 @@ export default function Register() {
                         <Submit text="Sign up"/>
                     </Form>
 
-                    <div className={styles.separator}>or</div>
+                    <Separator>or</Separator>
 
                     <div className={styles.buttons}>
                         <button onClick={signInWithGoogle} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
-                        <button className={styles.registerButton}>Sign in</button>
+                        <button onClick={() => { navigate("/login/") }} className={styles.registerButton}>Sign in</button>
                     </div>
                 </div>
             </div>

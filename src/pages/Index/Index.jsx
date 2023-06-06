@@ -3,7 +3,6 @@ import { signOut, getAuth } from "firebase/auth";
 import { useContext, useEffect } from "react";
 import UserContext from "../../context/userContext";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
 import { useState } from "react";
 
@@ -45,10 +44,6 @@ export default function Index() {
             </Helmet>
             <div>
                 <div>Hello {username}!</div>
-                <Link to="/register/">Register</Link>
-                <br />
-                <Link to="/login/">Log in</Link>
-                <br />
                 <button onClick={handleClick}>Log out</button>
             </div>
         </>

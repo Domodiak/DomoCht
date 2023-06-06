@@ -9,6 +9,7 @@ import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
+import Separator from "../../components/Separator/Separator"
 
 export default function Login() {
     const [ data, setData ] = useState({})
@@ -28,9 +29,6 @@ export default function Login() {
         signInWithEmailAndPassword(getAuth(), email, password1)
         .catch((error) => {
             console.log(error.code, error.message)
-        })
-        .then((userCredential) => {
-            console.log(userCredential.user.uid)
         })
     }
 
@@ -52,11 +50,11 @@ export default function Login() {
                         <Submit text="Sign in"/>
                     </Form>
 
-                    <div className={styles.separator}>or</div>
+                    <Separator>or</Separator>
 
                     <div className={styles.buttons}>
                         <button onClick={signInWithGoogle} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
-                        <button className={styles.registerButton}>Sign up</button>
+                        <button onClick={() => { navigate("/register/") }} className={styles.registerButton}>Sign up</button>
                     </div>
                 </div>
             </div>
