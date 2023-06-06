@@ -18,17 +18,19 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (_user) => {
-      const uid = _user.uid
-      const usernameQuery = query(collection(firestore, "usernames"), where("uid", "==", uid), limit(1))
-      getDocs(usernameQuery)
-        .then((snapshot) => {
-          if(!snapshot.empty) {
-            const username = snapshot.docs[0].id
-            setUser({ user: _user, username: username })
-            setLoading(false)
-          }
-        })
-        
+      if(_user) {
+        const uid = _user.uid
+        const usernameQuery = query(collection(firestore, "usernames"), where("uid", "==", uid), limit(1))
+        getDocs(usernameQuery)
+          .then((snapshot) => {
+            if(!snapshot.empty) {
+              const username = snapshot.docs[0].id
+              setUser({ user: _user, username: username })
+            }
+          })
+      }
+      
+      setLoading(false)
     })
     return unsubscribe
   })
