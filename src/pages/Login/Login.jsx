@@ -15,7 +15,7 @@ export default function Login() {
     const [ data, setData ] = useState({})
     
     const navigate = useNavigate()
-    const { user } = useContext(UserContext)
+    const user = useContext(UserContext)
     useEffect(() => {
         if(user) {
             navigate("/")   

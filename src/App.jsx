@@ -4,36 +4,12 @@ import { Helmet } from "react-helmet";
 import Index from "./pages/Index/Index";
 import Register from "./pages/Register/Register";
 import NotFound from "./pages/NotFound/NotFound";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import UserContext from "./context/userContext";
 import Login from "./pages/Login/Login";
-import { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
+import useUser from "./etc/useUser";
 
 function App() {
-  const auth = getAuth()
-  const firestore = getFirestore()
-  const [ user, setUser ] = useState(null)
-  const [ loading, setLoading ] = useState(true)
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (_user) => {
-      if(_user) {
-        const uid = _user.uid
-        const usernameQuery = query(collection(firestore, "usernames"), where("uid", "==", uid), limit(1))
-        getDocs(usernameQuery)
-          .then((snapshot) => {
-            if(!snapshot.empty) {
-              const username = snapshot.docs[0].id
-              setUser({ user: _user, username: username })
-            }
-          })
-      }
-      
-      setLoading(false)
-    })
-    return unsubscribe
-  })
+  const [ loading, user ] = useUser()
 
   return (
     <>

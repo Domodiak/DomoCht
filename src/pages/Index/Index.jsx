@@ -11,7 +11,7 @@ export default function Index() {
     }
     
     const navigate = useNavigate()
-    const { user, username } = useContext(UserContext)
+    const user = useContext(UserContext)
     
     useEffect(() => {
         if(!user) {
@@ -26,7 +26,7 @@ export default function Index() {
                 <title>DomoCht - Index</title>
             </Helmet>
             <div>
-                <div>Hello {username}!</div>
+                <div>Hello {user ? user.username : ""}!</div>
                 <button onClick={handleClick}>Log out</button>
             </div>
         </>

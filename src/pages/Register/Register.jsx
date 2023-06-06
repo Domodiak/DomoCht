@@ -17,7 +17,7 @@ export default function Register() {
     const firestore = getFirestore()
     const usernamesRef = collection(firestore, "usernames")
     const navigate = useNavigate()
-    const { user } = useContext(UserContext)
+    const user = useContext(UserContext)
     useEffect(() => {
         if(user) {
             navigate("/")   
