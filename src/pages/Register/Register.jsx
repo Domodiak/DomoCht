@@ -9,9 +9,11 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
+import { doc, getFirestore, updateDoc } from "firebase/firestore"
 
 export default function Register() {
 
+    const firestore = getFirestore()
     const navigate = useNavigate()
     const user = useContext(UserContext)
     useEffect(() => {
@@ -23,15 +25,21 @@ export default function Register() {
     const [ data, setData ] = useState({})
 
     function handleSubmit(e) {
-        //var username = data["username"] || ""
+        var username = data["username"] || ""
         var email = data["email"] || ""
         var password1 = data["password1"] || ""
         var password2 = data["password2"] || ""
         if(password1 !== password2) return
         createUserWithEmailAndPassword(getAuth(), email, password1)
-        .catch((error) => {
-            console.log(error.code, error.message)
-        })
+            .then((userCredential) => {
+                const uid = userCredential.user.uid
+                const userDoc = doc(firestore, "usernames", username)
+                
+                updateDoc(userDoc, { "uid": uid } )
+            })
+            .catch((error) => {
+                console.log(error.code, error.message)
+            })
     }
 
     function handleInput(name, event) {
