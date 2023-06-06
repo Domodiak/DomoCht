@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import UserContext from "../../context/userContext";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { collection, getDoc, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
 import { useState } from "react";
 
 export default function Index() {
