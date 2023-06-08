@@ -25,7 +25,7 @@ export default function Index() {
                 <title>DomoCht - Index</title>
             </Helmet>
             <div>
-                <div>Hello {user ? user.username : ""}!</div>
+                <div>Hello {user ? user.userData.username : ""}!</div>
                 <button onClick={handleClick}>Log out</button>
             </div>
         </>

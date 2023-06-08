@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useReducer } from "react";
 
@@ -20,12 +20,12 @@ export default function useUser() {
         const unsubscribe = onAuthStateChanged(auth, (_user) => {
             if(_user) {
                 const uid = _user.uid
-                const usernameQuery = query(collection(firestore, "usernames"), where("uid", "==", uid), limit(1))
-                getDocs(usernameQuery)
+                const userRef = doc(firestore, "users", uid)
+                getDoc(userRef)
                 .then((snapshot) => {
-                    if(!snapshot.empty) {
-                        const username = snapshot.docs[0].id
-                        userDispatch({ type: "set", data: { user: _user, username: username }})
+                    if(snapshot.exists()) {
+                        const userData = snapshot.data()
+                        userDispatch({ type: "set", data: { user: _user, userData: userData }})
                     }
                 })
             } else {

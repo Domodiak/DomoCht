@@ -9,7 +9,7 @@ import Login from "./pages/Login/Login";
 import useUser from "./etc/useUser";
 
 function App() {
-  const [ loading, user ] = useUser()
+  const [ loading, userData ] = useUser()
 
   return (
     <>
@@ -17,7 +17,7 @@ function App() {
         <title>DomoCht - Index</title>
       </Helmet>
       { loading ? <div>Loading....</div> :
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={userData}>
           <Router>
             <Routes>
               <Route index Component={Index}/>

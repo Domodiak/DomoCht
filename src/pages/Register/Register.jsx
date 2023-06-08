@@ -16,6 +16,7 @@ export default function Register() {
     
     const firestore = getFirestore()
     const usernamesRef = collection(firestore, "usernames")
+    const usersRef = collection(firestore, "users")
     const navigate = useNavigate()
     const user = useContext(UserContext)
     useEffect(() => {
@@ -31,15 +32,19 @@ export default function Register() {
         var email = data["email"] || ""
         var password1 = data["password1"] || ""
         var password2 = data["password2"] || ""
-        if(password1 !== password2) return
+        if(password1 !== password2) return //TODO: add errors
         createUserWithEmailAndPassword(getAuth(), email, password1)
             .then((userCredential) => {
                 const uid = userCredential.user.uid
                 
                 const usernameRef = doc(usernamesRef, username)
+                const userRef = doc(usersRef, uid)
                 setDoc(usernameRef, { "uid": uid })
                     .catch((err) => {
                         userCredential.user.delete() //well... skill issue
+                    })
+                    .then(() => {
+                        setDoc(userRef, { username: username, servers: [] })
                     })
             })
             .catch((error) => {
