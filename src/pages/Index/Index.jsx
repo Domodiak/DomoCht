@@ -12,12 +12,11 @@ export default function Index() {
     
     const navigate = useNavigate()
     const user = useContext(UserContext)
-    
     useEffect(() => {
         if(!user) {
             navigate("/login/")   
         }
-    })
+    }, [ user, navigate ])
 
 
     return(
