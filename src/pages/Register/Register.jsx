@@ -5,18 +5,14 @@ import styles from "./Register.module.scss"
 import PasswordField from "../../components/Form/TextField/PasswordField"
 import Submit from "../../components/Form/Buttons/Submit"
 import { useState, useContext, useEffect } from "react"
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore"
 import Separator from "../../components/Separator/Separator"
+import { createUser } from "../../etc/user"
 
 export default function Register() {
     
-    const firestore = getFirestore()
-    const usernamesRef = collection(firestore, "usernames")
-    const usersRef = collection(firestore, "users")
     const navigate = useNavigate()
     const user = useContext(UserContext)
     useEffect(() => {
@@ -33,23 +29,7 @@ export default function Register() {
         var password1 = data["password1"] || ""
         var password2 = data["password2"] || ""
         if(password1 !== password2) return //TODO: add errors
-        createUserWithEmailAndPassword(getAuth(), email, password1)
-            .then((userCredential) => {
-                const uid = userCredential.user.uid
-                
-                const usernameRef = doc(usernamesRef, username)
-                const userRef = doc(usersRef, uid)
-                setDoc(usernameRef, { "uid": uid })
-                    .catch((err) => {
-                        userCredential.user.delete() //well... skill issue
-                    })
-                    .then(() => {
-                        setDoc(userRef, { username: username, servers: [] })
-                    })
-            })
-            .catch((error) => {
-                console.log(error.code, error.message)
-            })
+        createUser(username, email)
     }
 
     function handleInput(name, event) {

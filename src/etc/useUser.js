@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useReducer } from "react";
+import { getServers } from "./servers";
 
 export default function useUser() {
     const auth = getAuth()
@@ -25,7 +26,10 @@ export default function useUser() {
                 .then((snapshot) => {
                     if(snapshot.exists()) {
                         const userData = snapshot.data()
-                        userDispatch({ type: "set", data: { user: _user, userData: userData }})
+                        getServers(userData)
+                        .then((serverData) => {
+                            userDispatch({ type: "set", data: { user: _user, userData: userData, serverData: serverData }})
+                        })
                     }
                 })
             } else {
