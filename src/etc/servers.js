@@ -31,10 +31,14 @@ export async function getServers(userData) {
     var servers = {}
 
     for(var i = 0; i < serverIDs.length; i++) {
-        const serverId = serverIDs[i]
-        const serverRef = doc(firestore, "servers", serverId)
-        const serverData = await getDoc(serverRef)
-        servers[serverId] = serverData.data()
+        try {
+            const serverId = serverIDs[i]
+            const serverRef = doc(firestore, "servers", serverId)
+            const serverData = await getDoc(serverRef)
+            servers[serverId] = serverData.data()
+        } catch (err) {
+            console.error(err)
+        }
     }
     return servers
 }
