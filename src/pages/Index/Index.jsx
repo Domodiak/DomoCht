@@ -32,7 +32,7 @@ export default function Index() {
                 <button onClick={() => { createServer("TestServer", user.user) }}>Make a server!</button>
                 { Object.values(user.serverData).map((value, index) => (
                     <div key={index}>
-                        <h1>{value.name}</h1>
+                        <a href={`/server/${Object.keys(user.serverData)[index]}/channelID`}>{value.name}</a>
                     </div>
                 )) }
             </div>
