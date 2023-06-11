@@ -4,9 +4,9 @@ const { v4: uuidv4 } = require("uuid")
 export async function createServer(name, creator) {
     const firestore = getFirestore()
     const serverUUID = uuidv4()
-    const serversRef = doc(firestore, "servers", serverUUID)
+    const serverRef = doc(firestore, "servers", serverUUID)
     
-    setDoc(serversRef, {
+    setDoc(serverRef, {
         name: name,
         creator: creator.uid,
         members: [],
