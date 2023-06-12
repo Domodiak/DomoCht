@@ -3,7 +3,6 @@ import { signOut, getAuth } from "firebase/auth";
 import { useContext, useEffect } from "react";
 import UserContext from "../../context/userContext";
 import { useNavigate } from "react-router";
-import { createServer } from "../../etc/servers";
 
 export default function Index() {
     function handleClick() {
@@ -29,7 +28,7 @@ export default function Index() {
             <div>
                 <div>Hello {user ? user.userData.username : ""}!</div>
                 <button onClick={handleClick}>Log out</button>
-                <button onClick={() => { createServer("TestServer", user.user) }}>Make a server!</button>
+                <button onClick={() => { navigate("/new-server/")}}>Make a server!</button>
                 { Object.values(user.serverData).map((value, index) => (
                     <div key={index}>
                         <a href={`/server/${Object.keys(user.serverData)[index]}/channelID`}>{value.name}</a>

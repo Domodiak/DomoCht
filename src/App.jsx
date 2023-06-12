@@ -8,6 +8,7 @@ import UserContext from "./context/userContext";
 import Login from "./pages/Login/Login";
 import useUser from "./etc/useUser";
 import Channel from "./pages/Channel/Channel";
+import CreateServer from "./pages/CreateServer/CreateServer";
 
 function App() {
   const [ loading, userData ] = useUser()
@@ -26,6 +27,7 @@ function App() {
               <Route path="register/" Component={Register}/>
               <Route path="*" Component={NotFound}/>
               <Route path="server/:sid/:cid/" Component={Channel}/>
+              <Route path="new-server/" Component={CreateServer} />
             </Routes>
           </Router>
         </UserContext.Provider>    
