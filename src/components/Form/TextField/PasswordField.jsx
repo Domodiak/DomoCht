@@ -1,7 +1,10 @@
 import { useState } from "react"
 import styles from "../Form.module.scss"
+import { useContext } from "react"
+import HandleInputContext from "../../../context/handleInputContext"
 
-export default function PasswordField({ placeholder, name, width, onInput }) {
+export default function PasswordField({ placeholder, name, width }) {
+    const onInput = useContext(HandleInputContext)
     const [ visible, setVisible ] = useState(false)
     return(
         <div style={{"width": width, "--placeholder": `"${placeholder}"`}} className={styles.inputContainer}>

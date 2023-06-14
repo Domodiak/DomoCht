@@ -4,12 +4,13 @@ import TextField from "../../components/Form/TextField/TextField"
 import styles from "./Register.module.scss"
 import PasswordField from "../../components/Form/TextField/PasswordField"
 import Submit from "../../components/Form/Buttons/Submit"
-import { useState, useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 import Separator from "../../components/Separator/Separator"
 import { createUser } from "../../etc/user"
+import useFormInputs from "../../etc/useFormInputs"
 
 export default function Register() {
     
@@ -22,7 +23,7 @@ export default function Register() {
     })
 
     const [ data, handleInput ] = useFormInputs()
-    
+
     function handleSubmit(e) {
         var username = data["username"] || ""
         var email = data["email"] || ""
@@ -40,11 +41,11 @@ export default function Register() {
             <div className={styles.app}>
                 <div className={styles.formContainer}>
                     <h1>Create an account</h1>
-                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit}>
-                        <TextField  name="username" placeholder="Username" type="text" width="30%" onInput={handleInput} />
-                        <TextField name="email" placeholder="Email" type="email" width="30%" onInput={handleInput} />
-                        <PasswordField name="password1" placeholder="Password" width="100%" onInput={handleInput} />
-                        <PasswordField name="password2" placeholder="Confirm Password" type="password" width="100%" onInput={handleInput} />
+                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput} >
+                        <TextField  name="username" placeholder="Username" type="text" width="30%" />
+                        <TextField name="email" placeholder="Email" type="email" width="30%" />
+                        <PasswordField name="password1" placeholder="Password" width="100%" />
+                        <PasswordField name="password2" placeholder="Confirm Password" type="password" width="100%" />
                         <Submit text="Sign up"/>
                     </Form>
 

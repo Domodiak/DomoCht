@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../../context/userContext";
 import { useNavigate } from "react-router";
 import { createServer } from "../../etc/servers";
@@ -34,8 +34,8 @@ export default function CreateServer() {
 
     return(
         <div className={styles.app}>
-            <Form formClass={styles.form} onSubmit={handleSubmit}>
-                <TextField name="serverName" placeholder="Server name" type="text" width="100%" onInput={handleInput} /> {/* Yes i had to dedicate a whole page for this one field */}
+            <Form formClass={styles.form} onSubmit={handleSubmit} onInput={handleInput} >
+                <TextField name="serverName" placeholder="Server name" type="text" width="100%" /> {/* Yes i had to dedicate a whole page for this one field */}
                 <Submit text="Create!"/>
             </Form>
         </div>

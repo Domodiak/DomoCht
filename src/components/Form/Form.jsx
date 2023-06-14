@@ -1,10 +1,14 @@
 import styles from './Form.module.scss'
+import HandleInputContext from '../../context/handleInputContext';
 
-export default function Form({ children, onSubmit, formClass }) {
+export default function Form({ children, onSubmit, onInput, formClass }) {
     const classes = [styles.form, formClass]
+    
     return(
         <form noValidate className={classes.join(' ')} onSubmit={(e) => {e.preventDefault(); onSubmit(e)}}>
-            { children }
+            <HandleInputContext.Provider value={onInput}>
+                { children }
+            </HandleInputContext.Provider>
         </form>
     )
 }

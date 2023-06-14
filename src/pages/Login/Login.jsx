@@ -4,7 +4,7 @@ import TextField from "../../components/Form/TextField/TextField"
 import styles from "./Login.module.scss"
 import PasswordField from "../../components/Form/TextField/PasswordField"
 import Submit from "../../components/Form/Buttons/Submit"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
@@ -41,9 +41,9 @@ export default function Login() {
             <div className={styles.app}>
                 <div className={styles.formContainer}>
                     <h1>Welcome!</h1>
-                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit}>
-                        <TextField name="email" placeholder="Email" type="email" width="100%" onInput={handleInput} />
-                        <PasswordField name="password1" placeholder="Password" width="100%" onInput={handleInput} />
+                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput}>
+                        <TextField name="email" placeholder="Email" type="email" width="100%" />
+                        <PasswordField name="password1" placeholder="Password" width="100%" />
                         <Submit text="Sign in"/>
                     </Form>
 
