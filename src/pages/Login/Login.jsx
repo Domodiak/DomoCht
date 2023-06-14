@@ -10,10 +10,9 @@ import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 import Separator from "../../components/Separator/Separator"
+import useFormInputs from "../../etc/useFormInputs"
 
 export default function Login() {
-    const [ data, setData ] = useState({})
-    
     const navigate = useNavigate()
     const user = useContext(UserContext)
     useEffect(() => {
@@ -32,9 +31,7 @@ export default function Login() {
         })
     }
 
-    function handleInput(name, event) {
-        setData((v) => {v[name] = event.target.value; return v})
-    }
+    const [ data, handleInput ] = useFormInputs()
 
     return (
         <>

@@ -6,6 +6,7 @@ import styles from "./CreateServer.module.scss";
 import Form from "../../components/Form/Form";
 import TextField from "../../components/Form/TextField/TextField";
 import Submit from "../../components/Form/Buttons/Submit";
+import useFormInputs from "../../etc/useFormInputs";
 
 export default function CreateServer() {
 
@@ -18,11 +19,7 @@ export default function CreateServer() {
         }
     })
 
-    const [ data, setData ] = useState({})
-
-    function handleInput(name, event) {
-        setData((v) => {v[name] = event.target.value; return v})
-    }
+    const [ data, handleInput ] = useFormInputs()
     
     const handleSubmit = () => {
         if(!data.serverName) return;

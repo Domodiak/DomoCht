@@ -21,8 +21,8 @@ export default function Register() {
         }
     })
 
-    const [ data, setData ] = useState({})
-
+    const [ data, handleInput ] = useFormInputs()
+    
     function handleSubmit(e) {
         var username = data["username"] || ""
         var email = data["email"] || ""
@@ -32,9 +32,6 @@ export default function Register() {
         createUser(username, email)
     }
 
-    function handleInput(name, event) {
-        setData((v) => {v[name] = event.target.value; return v})
-    }
     return (
         <>
             <Helmet>
