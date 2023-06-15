@@ -18,8 +18,6 @@ export default function Index() {
         }
     }, [ user, navigate ])
 
-    console.log(user.serverData)
-
     return(
         <>
             <Helmet>

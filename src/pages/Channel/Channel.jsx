@@ -30,8 +30,6 @@ export default function Channel() {
         }
     }, [ channel, cid, navigate, channels, loaded ])
 
-    console.log(channel)
-
     return (
         <div className={style.App}>
             { loaded ? `You are viewing a channel with name ${channel ? channel.name : "Erorr"}` : "Fetching channel..." }
