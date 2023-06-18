@@ -1,12 +1,11 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore"
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { collection, doc, setDoc } from "firebase/firestore"
 
-export function createUser(username, email, password1) {
-    const firestore = getFirestore()
+export function createUser(firestore, auth, username, email, password1) {
     const usernamesRef = collection(firestore, "usernames")
     const usersRef = collection(firestore, "users")
 
-    createUserWithEmailAndPassword(getAuth(), email, password1)
+    createUserWithEmailAndPassword(auth, email, password1)
     .then((userCredential) => {
         const uid = userCredential.user.uid
         
@@ -24,6 +23,6 @@ export function createUser(username, email, password1) {
         })
     })
     .catch((error) => {
-        console.log(error.code, error.message)
+        console.log("User Creation Error", error.code, error.message)
     })
 }

@@ -9,22 +9,12 @@ import Login from "./pages/Login/Login";
 import useUser from "./etc/useUser";
 import Channel from "./pages/Channel/Channel";
 import CreateServer from "./pages/CreateServer/CreateServer";
-import { initializeApp } from "firebase/app";
+import { useContext } from "react";
+import FirebaseContext from "./context/firebaseContext";
 
 function App() {
-  const firebaseConfig = {
-    apiKey: "AIzaSyDr9Xn0gJWngjIGWwxbmLg7Q-Aw8iKsHt8",
-    authDomain: "domocht.firebaseapp.com",
-    databaseURL: "https://domocht-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "domocht",
-    storageBucket: "domocht.appspot.com",
-    messagingSenderId: "744420899507",
-    appId: "1:744420899507:web:9328b17fd7adb580fa0ec6",
-    measurementId: "G-XHK396DF1J"
-  };
-  initializeApp(firebaseConfig); //this has been thrown back and forth between App.jsx and index.js like 3 times already
-
-  const [ loading, userData ] = useUser()
+  const { auth, firestore } = useContext(FirebaseContext)
+  const [ loading, userData ] = useUser(firestore, auth)
 
   return (
     <>

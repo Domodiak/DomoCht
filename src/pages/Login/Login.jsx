@@ -5,16 +5,18 @@ import styles from "./Login.module.scss"
 import PasswordField from "../../components/Form/TextField/PasswordField"
 import Submit from "../../components/Form/Buttons/Submit"
 import { useContext, useEffect } from "react"
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
 import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 import Separator from "../../components/Separator/Separator"
 import useFormInputs from "../../etc/useFormInputs"
+import FirebaseContext from "../../context/firebaseContext"
 
 export default function Login() {
     const navigate = useNavigate()
     const user = useContext(UserContext)
+    const { auth } = useContext(FirebaseContext)
     useEffect(() => {
         if(user) {
             navigate("/")   
@@ -25,7 +27,7 @@ export default function Login() {
     function handleSubmit(e) {
         var email = data["email"] || ""
         var password1 = data["password1"] || ""
-        signInWithEmailAndPassword(getAuth(), email, password1)
+        signInWithEmailAndPassword(auth, email, password1)
         .catch((error) => {
             console.log(error.code, error.message)
         })
@@ -50,7 +52,7 @@ export default function Login() {
                     <Separator>or</Separator>
 
                     <div className={styles.buttons}>
-                        <button onClick={signInWithGoogle} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
+                        <button onClick={() => { signInWithGoogle(auth) }} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
                         <button onClick={() => { navigate("/register/") }} className={styles.registerButton}>Sign up</button>
                     </div>
                 </div>

@@ -1,12 +1,10 @@
 import { useEffect } from "react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import { useReducer } from "react";
 import { getServers } from "./servers";
 
-export default function useUser() {
-    const auth = getAuth()
-    const firestore = getFirestore()
+export default function useUser(firestore, auth) {
     const [ userState, userDispatch ] = useReducer((state, action) => {
         switch(action.type) {
             case "set":
@@ -20,18 +18,21 @@ export default function useUser() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (_user) => {
             if(_user) {
-                const uid = _user.uid
-                const userRef = doc(firestore, "users", uid)
-                getDoc(userRef)
-                .then((snapshot) => {
-                    if(snapshot.exists()) {
-                        const userData = snapshot.data()
-                        getServers(userData)
-                        .then((serverData) => {
-                            userDispatch({ type: "set", data: { user: _user, userData: userData, serverData: serverData }})
-                        })
-                    }
-                })
+                setTimeout(() => {
+                    const uid = _user.uid
+                    const userRef = doc(firestore, "users", uid)
+                    getDoc(userRef)
+                    .then((snapshot) => {
+                        if(snapshot.exists()) {
+                            const userData = snapshot.data()
+                            getServers(firestore, userData)
+                            .then((serverData) => {
+                                userDispatch({ type: "set", data: { user: _user, userData: userData, serverData: serverData }})
+                            })
+                        }
+                    })
+
+                }, 2000)
             } else {
                 userDispatch({ type: "reset" })
             }

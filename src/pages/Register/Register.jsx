@@ -11,16 +11,18 @@ import { signInWithGoogle } from "../../etc/SignInWithGoogle"
 import Separator from "../../components/Separator/Separator"
 import { createUser } from "../../etc/user"
 import useFormInputs from "../../etc/useFormInputs"
+import FirebaseContext from "../../context/firebaseContext"
 
 export default function Register() {
     
     const navigate = useNavigate()
     const user = useContext(UserContext)
+    const { firestore, auth } = useContext(FirebaseContext)
     useEffect(() => {
         if(user) {
             navigate("/")   
         }
-    })
+    }, [user, navigate])
 
     const [ data, handleInput ] = useFormInputs()
 
@@ -30,7 +32,7 @@ export default function Register() {
         var password1 = data["password1"] || ""
         var password2 = data["password2"] || ""
         if(password1 !== password2) return //TODO: add errors
-        createUser(username, email)
+        createUser(firestore, auth, username, email, password1)
     }
 
     return (
@@ -38,7 +40,7 @@ export default function Register() {
             <Helmet>
                 <title>DomoCht - Registration</title>
             </Helmet>
-            <div className={styles.app}>
+            <div className={styles.app} data-testid='register'>
                 <div className={styles.formContainer}>
                     <h1>Create an account</h1>
                     <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput} >
@@ -52,7 +54,7 @@ export default function Register() {
                     <Separator>or</Separator>
 
                     <div className={styles.buttons}>
-                        <button onClick={signInWithGoogle} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
+                        <button onClick={() => { signInWithGoogle(auth) }} className={styles.registerButton}><img className={styles.buttonGoogleLogo} src="/Google.svg" alt=""/>Sign in with Google</button>
                         <button onClick={() => { navigate("/login/") }} className={styles.registerButton}>Sign in</button>
                     </div>
                 </div>

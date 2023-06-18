@@ -7,11 +7,13 @@ import Form from "../../components/Form/Form";
 import TextField from "../../components/Form/TextField/TextField";
 import Submit from "../../components/Form/Buttons/Submit";
 import useFormInputs from "../../etc/useFormInputs";
+import FirebaseContext from "../../context/firebaseContext";
 
 export default function CreateServer() {
 
     const user = useContext(UserContext)
     const navigate = useNavigate()
+    const { firestore } = useContext(FirebaseContext)
 
     useEffect(() => {
         if(!user) {
@@ -23,7 +25,7 @@ export default function CreateServer() {
     
     const handleSubmit = () => {
         if(!data.serverName) return;
-        createServer(data.serverName, user.user)
+        createServer(firestore, data.serverName, user.user)
         .then(([success, UUID]) => {
             if(success) {
                 console.log(success, UUID)

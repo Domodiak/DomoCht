@@ -1,9 +1,8 @@
-import { arrayUnion, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore"
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 const { v4: uuidv4 } = require("uuid")
 
-export async function createServer(name, creator) {
+export async function createServer(firestore, name, creator) {
     try {
-        const firestore = getFirestore()
         const serverUUID = uuidv4()
         const serverRef = doc(firestore, "servers", serverUUID)
         
@@ -14,16 +13,15 @@ export async function createServer(name, creator) {
             channels: []
         })
     
-        let success = joinServer(serverUUID, creator)
+        let success = joinServer(firestore, serverUUID, creator)
         return [success, serverUUID]
     } catch {
         return false
     }
 }
 
-export function joinServer(uuid, user) {
+export function joinServer(firestore, uuid, user) {
     try {
-        const firestore = getFirestore()
         const userRef = doc(firestore, "users", user.uid)
         const serverRef = doc(firestore, "servers", uuid)
     
@@ -36,8 +34,7 @@ export function joinServer(uuid, user) {
     return true
 }
 
-export async function getServers(userData) {
-    const firestore = getFirestore()
+export async function getServers(firestore, userData) {
     const serverIDs = userData.servers
     var servers = {}
 

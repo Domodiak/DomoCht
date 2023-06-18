@@ -1,9 +1,8 @@
-import { arrayUnion, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore"
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 const { v4: uuidv4 } = require("uuid")
 
-export async function createChannel(name, serverID, creator) {
+export async function createChannel(firestore, name, serverID, creator) {
     try {
-        const firestore = getFirestore()
         const channelUUID = uuidv4()
         const channelRef = doc(firestore, "channels", channelUUID)
         const serverRef = doc(firestore, "servers", serverID)
@@ -20,9 +19,8 @@ export async function createChannel(name, serverID, creator) {
     }
 }
 
-export async function getChannel(channelId) {
+export async function getChannel(firestore, channelId) {
     try {
-        const firestore = getFirestore()
         const channelRef = doc(firestore, "channel", channelId)
         const channelData = await getDoc(channelRef)
         return channelData.data()
