@@ -45,7 +45,7 @@ export default function Login() {
                     <h1>Welcome!</h1>
                     <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput}>
                         <TextField name="email" placeholder="Email" type="email" width="100%" />
-                        <PasswordField name="password1" placeholder="Password" width="100%" />
+                        <TextField passwordSwitch name="password1" type="text" typeInvisible="password" placeholder="Password" width="100%" />
                         <Submit text="Sign in"/>
                     </Form>
 
