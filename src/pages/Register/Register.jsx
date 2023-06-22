@@ -44,10 +44,10 @@ export default function Register() {
                 <div className={styles.formContainer}>
                     <h1>Create an account</h1>
                     <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput} >
-                        <TextField  name="username" placeholder="Username" type="text" width="30%" />
+                        <TextField name="username" placeholder="Username" type="text" width="30%" />
                         <TextField name="email" placeholder="Email" type="email" width="30%" />
-                        <PasswordField name="password1" placeholder="Password" width="100%" />
-                        <PasswordField name="password2" placeholder="Confirm Password" type="password" width="100%" />
+                        <TextField passwordSwitch name="password1" type="text" typeInvisible="password" placeholder="Password" width="100%" />
+                        <TextField passwordSwitch name="password2" type="text" typeInvisible="password" placeholder="Confirm Password" width="100%" />
                         <Submit text="Sign up"/>
                     </Form>
 
