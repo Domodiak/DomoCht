@@ -1,8 +1,6 @@
 import { Helmet } from "react-helmet"
 import Form from "../../components/Form/Form"
-import TextField from "../../components/Form/TextField/TextField"
 import styles from "./Login.module.scss"
-import Submit from "../../components/Form/Buttons/Submit"
 import { useContext, useEffect } from "react"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import UserContext from "../../context/userContext"
@@ -42,11 +40,28 @@ export default function Login() {
             <div className={styles.app}>
                 <div className={styles.formContainer}>
                     <h1>Welcome!</h1>
-                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput}>
-                        <TextField name="email" placeholder="Email" type="email" width="100%" />
-                        <TextField passwordSwitch name="password1" type="text" typeInvisible="password" placeholder="Password" width="100%" />
-                        <Submit text="Sign in"/>
-                    </Form>
+                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput} fields={[
+                        {
+                            ComponentType: "input",
+                            name: "email",
+                            placeholder: "Email",
+                            type: "email",
+                            width: "100%",
+                        },
+                        {
+                            ComponentType: "input",
+                            name: "password1",
+                            placeholder: "Password",
+                            type: "text",
+                            width: "100%",
+                            passwordSwitch: true,
+                            typeInvisible: "password",
+                        },
+                        {
+                            ComponentType: "submit",
+                            text: "Sign in",
+                        }
+                    ]} />
 
                     <Separator>or</Separator>
 

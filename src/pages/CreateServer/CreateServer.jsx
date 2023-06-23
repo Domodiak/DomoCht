@@ -4,8 +4,6 @@ import { useNavigate } from "react-router";
 import { createServer } from "../../etc/servers";
 import styles from "./CreateServer.module.scss";
 import Form from "../../components/Form/Form";
-import TextField from "../../components/Form/TextField/TextField";
-import Submit from "../../components/Form/Buttons/Submit";
 import useFormInputs from "../../etc/useFormInputs";
 import FirebaseContext from "../../context/firebaseContext";
 
@@ -36,10 +34,21 @@ export default function CreateServer() {
 
     return(
         <div className={styles.app}>
-            <Form formClass={styles.form} onSubmit={handleSubmit} onInput={handleInput} >
-                <TextField name="serverName" placeholder="Server name" type="text" width="100%" /> {/* Yes i had to dedicate a whole page for this one field */}
-                <Submit text="Create!"/>
-            </Form>
+            <Form formClass={styles.form} onSubmit={handleSubmit} onInput={handleInput} fields={ //wish this was typescript but its damn hard to get working properly
+                [
+                    {
+                        ComponentType: "input",
+                        name: "serverName",
+                        placeholder: "Server name",
+                        type: "text",
+                        width: "100%"
+                    },
+                    {
+                        ComponentType: "submit",
+                        text: "Create!"
+                    }
+                ]
+            } />
         </div>
     )
 

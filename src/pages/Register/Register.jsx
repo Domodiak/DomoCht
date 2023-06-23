@@ -1,8 +1,6 @@
 import { Helmet } from "react-helmet"
 import Form from "../../components/Form/Form"
-import TextField from "../../components/Form/TextField/TextField"
 import styles from "./Register.module.scss"
-import Submit from "../../components/Form/Buttons/Submit"
 import { useContext, useEffect } from "react"
 import UserContext from "../../context/userContext"
 import { useNavigate } from "react-router"
@@ -30,7 +28,7 @@ export default function Register() {
         var email = data["email"] || ""
         var password1 = data["password1"] || ""
         var password2 = data["password2"] || ""
-        if(password1 !== password2) return //TODO: add errors
+        if(password1 !== password2) return
         createUser(firestore, auth, username, email, password1)
     }
 
@@ -42,13 +40,46 @@ export default function Register() {
             <div className={styles.app} data-testid='register'>
                 <div className={styles.formContainer}>
                     <h1>Create an account</h1>
-                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput} >
-                        <TextField name="username" placeholder="Username" type="text" width="30%" />
-                        <TextField name="email" placeholder="Email" type="email" width="30%" />
-                        <TextField passwordSwitch name="password1" type="text" typeInvisible="password" placeholder="Password" width="100%" />
-                        <TextField passwordSwitch name="password2" type="text" typeInvisible="password" placeholder="Confirm Password" width="100%" />
-                        <Submit text="Sign up"/>
-                    </Form>
+                    <Form formClass={styles.registrationForm} onSubmit={handleSubmit} onInput={handleInput} fields={
+                        [
+                            {
+                                ComponentType: "input",
+                                name: "username",
+                                placeholder: "Username",
+                                type: "text",
+                                width: "30%"
+                            },
+                            {
+                                ComponentType: "input",
+                                name: "email",
+                                placeholder: "Email",
+                                type: "email",
+                                width: "30%"
+                            },
+                            {
+                                ComponentType: "input",
+                                name: "password1",
+                                placeholder: "Passowrd",
+                                type: "text",
+                                width: "100%",
+                                typeInvisible: "password",
+                                passwordSwitch: true
+                            },
+                            {
+                                ComponentType: "input",
+                                name: "password2",
+                                placeholder: "Confirm Password",
+                                type: "text",
+                                width: "100%",
+                                typeInvisible: "password",
+                                passwordSwitch: true
+                            },
+                            {
+                                ComponentType: "submit",
+                                text: "Create!"
+                            }
+                        ]
+                    } />
 
                     <Separator>or</Separator>
 
