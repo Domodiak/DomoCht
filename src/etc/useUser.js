@@ -32,7 +32,7 @@ export default function useUser(firestore, auth) {
                         }
                     })
 
-                }, 2000)
+                }, 1000)
             } else {
                 userDispatch({ type: "reset" })
             }

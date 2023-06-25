@@ -75,3 +75,15 @@ $placeholder: "";
         cursor: pointer;
     }
 }
+
+.error {
+    color: red;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0%;
+    z-index: 2;
+    background-color: var(--background);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 2px solid var(--secondary-button);
+}
