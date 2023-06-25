@@ -69,6 +69,11 @@ export default function Register() {
                                 type: "email",
                                 width: "30%",
                                 validationFunction: (v) => {
+
+                                    if(v == null || v === "") {
+                                        return [false]
+                                    }
+
                                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                     if (!emailRegex.test(v)) {
                                         return [false, "Invalid email format"];
@@ -113,7 +118,7 @@ export default function Register() {
                                 typeInvisible: "password",
                                 passwordSwitch: true,
                                 validationFunction: (v) => {
-                                    if(v == null) {
+                                    if(v == null || v === "") {
                                         return [false]
                                     }
 
